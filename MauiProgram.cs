@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using StoryGameTools.Components;
 
 namespace StoryGameTools
 {
@@ -15,6 +16,11 @@ namespace StoryGameTools
                 });
 
             builder.Services.AddMauiBlazorWebView();
+            builder.Services.AddMauiBlazorWebView();
+            builder.Services.AddSingleton<ILoggerService, LoggerService>();
+            builder.Services.AddSingleton<CharacterDatabaseService>();
+            builder.Services.AddSingleton<ScriptParserService>();
+            builder.Services.AddTransient<FileService>();
 
 #if DEBUG
     		builder.Services.AddBlazorWebViewDeveloperTools();
