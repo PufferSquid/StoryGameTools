@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using StoryGameTools.Components;
+using StoryGameTools.Components.Services;
 
 namespace StoryGameTools
 {
@@ -21,6 +21,13 @@ namespace StoryGameTools
             builder.Services.AddSingleton<CharacterDatabaseService>();
             builder.Services.AddSingleton<ScriptParserService>();
             builder.Services.AddTransient<FileService>();
+            builder.Services.AddSingleton<AppSettingsService>();
+            builder.Services.AddSingleton<ProjectService>();
+
+#if WINDOWS
+            builder.Services.AddSingleton<IFolderPickerService,
+             StoryGameTools.Platforms.Windows.FolderPickerService>();
+#endif
 
 #if DEBUG
     		builder.Services.AddBlazorWebViewDeveloperTools();

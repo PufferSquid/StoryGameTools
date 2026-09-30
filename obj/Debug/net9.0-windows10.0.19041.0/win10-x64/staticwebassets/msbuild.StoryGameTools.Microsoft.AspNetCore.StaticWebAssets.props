@@ -92,12 +92,12 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName>ScopedCss</AssetTraitName>
       <AssetTraitValue>ApplicationBundle</AssetTraitValue>
-      <Fingerprint>p7yjaqhjeo</Fingerprint>
-      <Integrity>CwoQKusPWjOaOuvUWrz9Auqvi/ez352jPMeQX4tbZCQ=</Integrity>
+      <Fingerprint>beoxrw0yu3</Fingerprint>
+      <Integrity>w/QOUKTtvCsxeieHNYDzY6/JvyN18F+jav2YfnXzs4w=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <FileLength>5481</FileLength>
-      <LastWriteTime>Wed, 30 Sep 2026 09:05:08 GMT</LastWriteTime>
+      <FileLength>6685</FileLength>
+      <LastWriteTime>Wed, 30 Sep 2026 15:00:58 GMT</LastWriteTime>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\StoryGameTools.styles.css'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>

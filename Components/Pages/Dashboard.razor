@@ -1,0 +1,68 @@
+@page "/"
+@using StoryGameTools.Components.Services
+@inject ProjectService ProjectService
+
+<div class="dashboard">
+    <h1>StoryGameTools</h1>
+
+    @if (ProjectService.ActiveProject == null)
+    {
+        <p class="no-project-hint">Open or create a project from the sidebar to get started.</p>
+    }
+    else
+    {
+        <p class="project-hint">@ProjectService.ActiveProject.Name</p>
+    }
+
+    <div class="feature-grid">
+        @foreach (var card in _cards)
+        {
+            <div class="feature-card @(IsDisabled ? "disabled" : "")" 
+                 title="@(IsDisabled ? "Open a project first" : card.Description)">
+                @if (IsDisabled)
+                {
+                    <div class="card-inner">
+                        <span class="card-icon">@card.Icon</span>
+                        <h2>@card.Title</h2>
+                        <p>@card.Description</p>
+                    </div>
+                }
+                else
+                {
+                    <a href="@card.Route" class="card-inner">
+                        <span class="card-icon">@card.Icon</span>
+                        <h2>@card.Title</h2>
+                        <p>@card.Description</p>
+                    </a>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private bool IsDisabled => ProjectService.ActiveProject == null;
+
+    private record FeatureCard(string Title, string Description, string Icon, string Route);
+
+    private readonly List<FeatureCard> _cards = new()
+    {
+        new("Script Parser",   "Convert dialogue scripts into Ink files.",          "📄", "/parser"),
+        new("Characters",      "Manage character portraits and emotions.",           "🎭", "/characters"),
+        new("Script Preview",  "Preview output Ink scripts with character art.",     "👁", "/preview"),
+        new("Image Splitter",  "Slice sprite sheets into individual portrait PNGs.", "✂️", "/images"),
+        new("Validator",       "Check all scripts and characters for errors.",       "✅", "/validator"),
+    };
+
+    protected override void OnInitialized()
+    {
+        ProjectService.ActiveProjectChanged += OnProjectChanged;
+    }
+
+    private void OnProjectChanged() => InvokeAsync(StateHasChanged);
+
+    public void Dispose()
+    {
+        ProjectService.ActiveProjectChanged -= OnProjectChanged;
+    }
+}

@@ -1,27 +1,89 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">StoryGameTools</a>
-    </div>
+﻿@using StoryGameTools.Components.Services
+
+
+<div class="nav-item px-3 project-section">
+    @if (ProjectService.ActiveProject != null)
+    {
+        <div class="active-project">
+            <span class="project-name">@ProjectService.ActiveProject.Name</span>
+            <button class="btn btn-sm btn-outline-light mt-1" @onclick="OpenProject">Switch</button>
+        </div>
+    }
+    else
+    {
+        <div class="no-project">
+            <span class="text-muted-light">No project open</span>
+            <button class="btn btn-sm btn-outline-light mt-1" @onclick="OpenProject">Open</button>
+            <button class="btn btn-sm btn-outline-light mt-1" @onclick="CreateProject">New</button>
+        </div>
+    }
+
+    @if (_warnings.Count > 0)
+    {
+        <ul class="warnings mt-2">
+            @foreach (var w in _warnings)
+            {
+                <li>@w</li>
+            }
+        </ul>
+    }
 </div>
 
-<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
 
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
-    </nav>
+<div class="nav-item px-3">
+    <NavLink class="nav-link" href="parser">📄 Script Parser</NavLink>
 </div>
+<div class="nav-item px-3">
+    <NavLink class="nav-link" href="characters">🎭 Characters</NavLink>
+</div>
+<div class="nav-item px-3">
+    <NavLink class="nav-link" href="preview">👁 Script Preview</NavLink>
+</div>
+<div class="nav-item px-3">
+    <NavLink class="nav-link" href="images">✂️ Image Splitter</NavLink>
+</div>
+<div class="nav-item px-3">
+    <NavLink class="nav-link" href="validator">✅ Validator</NavLink>
+</div>
+
+
+
+@inject ProjectService ProjectService
+@inject IFolderPickerService FolderPicker
+@implements IDisposable
+
+@code {
+    private List<string> _warnings = new();
+
+    protected override void OnInitialized()
+    {
+        ProjectService.ActiveProjectChanged += OnProjectChanged;
+    }
+
+    private void OnProjectChanged() => InvokeAsync(StateHasChanged);
+
+    private async Task OpenProject()
+    {
+        _warnings.Clear();
+        var path = await FolderPicker.PickFolderAsync();
+        if (path == null) return;
+
+        _warnings = await ProjectService.OpenProjectAsync(path);
+    }
+
+    private async Task CreateProject()
+    {
+        _warnings.Clear();
+        var path = await FolderPicker.PickFolderAsync();
+        if (path == null) return;
+
+        // Use the folder name as the project name by default
+        var name = Path.GetFileName(path);
+        await ProjectService.CreateProjectAsync(path, name);
+    }
+
+    public void Dispose()
+    {
+        ProjectService.ActiveProjectChanged -= OnProjectChanged;
+    }
+}

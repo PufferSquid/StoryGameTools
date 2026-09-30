@@ -1,0 +1,27 @@
+@using StoryGameTools.Components.Services
+
+@inject ProjectService ProjectService
+
+@if (_initialized)
+{
+    @ChildContent
+}
+else
+{
+    <p>Loading...</p>
+}
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    private bool _initialized = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ProjectService.TryRestoreLastProjectAsync();
+        _initialized = true;
+    }
+}
+
+
+
