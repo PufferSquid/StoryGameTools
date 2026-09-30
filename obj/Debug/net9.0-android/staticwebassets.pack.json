@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\User\\Documents\\CodeProjects\\StoryGameTools\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\StoryGameTools.styles.css",
+      "PackagePath": "staticwebassets\\StoryGameTools.styles.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\Documents\\CodeProjects\\StoryGameTools\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\Documents\\CodeProjects\\StoryGameTools\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\Documents\\CodeProjects\\StoryGameTools\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\User\\Documents\\CodeProjects\\StoryGameTools\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0-android\\staticwebassets\\msbuild.StoryGameTools.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0-android\\staticwebassets\\msbuild.StoryGameTools.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0-android\\staticwebassets\\msbuild.build.StoryGameTools.props",
+      "PackagePath": "build\\StoryGameTools.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0-android\\staticwebassets\\msbuild.buildMultiTargeting.StoryGameTools.props",
+      "PackagePath": "buildMultiTargeting\\StoryGameTools.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0-android\\staticwebassets\\msbuild.buildTransitive.StoryGameTools.props",
+      "PackagePath": "buildTransitive\\StoryGameTools.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
