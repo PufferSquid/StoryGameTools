@@ -1,2 +1,3 @@
-2026/09/30-16:05:31.126 63e8 Creating DB C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\StoryGameTools.exe.WebView2\EBWebView\Default\Local Storage\leveldb since it was missing.
-2026/09/30-16:05:31.156 63e8 Reusing MANIFEST C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\StoryGameTools.exe.WebView2\EBWebView\Default\Local Storage\leveldb/MANIFEST-000001
+2026/10/02-06:14:58.470 7764 Reusing MANIFEST C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\StoryGameTools.exe.WebView2\EBWebView\Default\Local Storage\leveldb/MANIFEST-000001
+2026/10/02-06:14:58.475 7764 Recovering log #3
+2026/10/02-06:14:58.484 7764 Reusing old log C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\StoryGameTools.exe.WebView2\EBWebView\Default\Local Storage\leveldb/000003.log 

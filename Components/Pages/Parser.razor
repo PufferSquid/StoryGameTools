@@ -1,0 +1,160 @@
+@page "/parser"
+@using StoryGameTools.Components.Services
+@inject ScriptParserService ParserService
+@inject CharacterDatabaseService CharacterDb
+@inject ProjectService ProjectService
+@inject IJSRuntime JS
+
+
+
+<div class="parser-page">
+    <h2>Script Parser</h2>
+
+    <div class="toolbar">
+        <InputFile OnChange="OnFilesSelected" multiple accept=".txt"
+                   id="fileInput" style="display:none" />
+        <button class="btn" onclick="document.getElementById('fileInput').click()">
+            + Add Files
+        </button>
+        <button class="btn btn-primary" @onclick="ConvertAll" 
+                disabled="@(!_files.Any())">
+            Convert All
+        </button>
+        <button class="btn btn-success" @onclick="SaveAll"
+                disabled="@(!_files.Any(f => f.HasOutput))">
+            Save All
+        </button>
+        @if (_saveConfirmation != null)
+        {
+            <span class="save-confirmation">@_saveConfirmation</span>
+        }
+    </div>
+
+    @if (_allWarnings.Any())
+    {
+        <div class="warnings-panel">
+            @foreach (var (fileName, warning) in _allWarnings)
+            {
+                <div class="warning-item">
+                    <strong>@fileName:</strong> @warning
+                </div>
+            }
+        </div>
+    }
+
+    <div class="drop-zone @(_isDragging ? "dragging" : "")"
+        @ondragover:preventDefault
+        @ondragover="() => _isDragging = true"
+        @ondragleave="() => _isDragging = false"
+        @ondrop="OnDrop">
+        <p class="drop-hint">Drop .txt files here or use Add Files above</p>
+    </div>
+
+    <div class="columns">
+        <div class="column">
+            <h3>Input</h3>
+            @foreach (var file in _files)
+            {
+                <div class="script-block">
+                    <div class="script-block-header">
+                        <span>@file.FileName</span>
+                        <button class="btn-remove" 
+                                @onclick="() => RemoveFile(file)">✕</button>
+                    </div>
+                    <pre class="script-text">@file.InputText</pre>
+                </div>
+            }
+        </div>
+
+        @if (_files.Any(f => f.HasOutput))
+        {
+            <div class="column">
+                <h3>Output</h3>
+                @foreach (var file in _files)
+                {
+                    <div class="script-block">
+                        <div class="script-block-header">
+                            <span>@file.FileName</span>
+                        </div>
+                        <pre class="script-text">@(file.OutputText ?? "Not yet converted.")</pre>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+
+
+@code {
+    private List<ScriptFile> _files = new();
+    private List<(string FileName, string Warning)> _allWarnings = new();
+    private bool _isDragging = false;
+    private string? _saveConfirmation;
+
+    // Reads files selected via the file picker
+    private async Task OnFilesSelected(InputFileChangeEventArgs e)
+    {
+        foreach (var file in e.GetMultipleFiles())
+            await LoadFile(file.Name, file.OpenReadStream());
+    }
+
+    // Drag and drop fires an ondrop event — we read the files via JS interop
+    // because Blazor's drag-drop API doesn't expose file contents directly
+    private async Task OnDrop(DragEventArgs e)
+    {
+        _isDragging = false;
+        // JS interop call reads the dropped files and returns them as base64
+        // We'll wire this up in wwwroot/parserInterop.js
+        var results = await JS.InvokeAsync<List<DroppedFile>>("parserInterop.getDroppedFiles");
+        foreach (var dropped in results)
+        {
+            var bytes = Convert.FromBase64String(dropped.Base64);
+            var stream = new MemoryStream(bytes);
+            await LoadFile(dropped.Name, stream);
+        }
+    }
+
+    private async Task LoadFile(string name, Stream stream)
+    {
+        // Skip duplicates
+        if (_files.Any(f => f.FileName == name)) return;
+
+        using var reader = new StreamReader(stream);
+        var text = await reader.ReadToEndAsync();
+        _files.Add(new ScriptFile { FileName = name, InputText = text });
+    }
+
+    private async Task ConvertAll()
+    {
+        _allWarnings.Clear();
+        var db = await CharacterDb.LoadAsync();
+        await ParserService.ParseAllAsync(_files, db);
+
+        // Flatten all warnings across files for the warnings panel
+        foreach (var file in _files)
+            foreach (var w in file.Warnings)
+                _allWarnings.Add((file.FileName, w));
+    }
+
+    private async Task SaveAll()
+    {
+        var basePath = ProjectService.GetProjectPath("dialogueScripts");
+        if (basePath == null) return;
+
+        foreach (var file in _files.Where(f => f.HasOutput))
+        {
+            var outName = Path.ChangeExtension(file.FileName, ".ink");
+            var outPath = Path.Combine(basePath, outName);
+            await File.WriteAllTextAsync(outPath, file.OutputText);
+        }
+
+        _saveConfirmation = $"Saved {_files.Count(f => f.HasOutput)} file(s) to dialogueScripts/";
+    }
+
+    private void RemoveFile(ScriptFile file)
+    {
+        _files.Remove(file);
+        _allWarnings.RemoveAll(w => w.FileName == file.FileName);
+    }
+}

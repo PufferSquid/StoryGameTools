@@ -1,0 +1,107 @@
+.parser-page {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.toolbar {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.save-confirmation {
+    font-size: 0.85rem;
+    color: #6fcf97;
+}
+
+.warnings-panel {
+    background: #2a1a1a;
+    border: 1px solid #7c3030;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    color: #f2994a;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.warning-item + .warning-item {
+    margin-top: 0.25rem;
+}
+
+.drop-zone {
+    flex: 1;
+    border: 2px dashed #333;
+    border-radius: 8px;
+    padding: 1rem;
+    transition: border-color 0.15s;
+    overflow-y: auto;
+}
+
+.drop-zone.dragging {
+    border-color: #7c5cbf;
+    background: rgba(124, 92, 191, 0.05);
+}
+
+.drop-hint {
+    color: #555;
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.column h3 {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 0.75rem;
+}
+
+.script-block {
+    border: 1px solid #2a2a2a;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.script-block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 0.75rem;
+    background: #1a1a1a;
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+.btn-remove {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 0.75rem;
+    padding: 0;
+}
+
+.btn-remove:hover {
+    color: #f2994a;
+}
+
+.script-text {
+    padding: 0.75rem;
+    margin: 0;
+    font-size: 0.8rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+    color: #ccc;
+}

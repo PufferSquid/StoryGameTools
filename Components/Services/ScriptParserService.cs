@@ -9,6 +9,17 @@ namespace StoryGameTools.Components.Services
         private static readonly Regex EmotionTagRegex = new(@"#\s*(.+)$");
         private static readonly Regex AutoLineRegex = new(@"^#\s*auto\s+(start|stop|end)\s*$", RegexOptions.IgnoreCase);
 
+
+        public async Task ParseAllAsync(List<ScriptFile> files, CharacterDatabase db)
+        {
+            foreach (var file in files)
+            {
+                var result = Parse(file.InputText, db);
+                file.OutputText = result.InkOutput;
+                file.Warnings = result.Warnings;
+            }
+        }
+
         public ParseResult Parse(string scriptText, CharacterDatabase db)
         {
             var result = new ParseResult();

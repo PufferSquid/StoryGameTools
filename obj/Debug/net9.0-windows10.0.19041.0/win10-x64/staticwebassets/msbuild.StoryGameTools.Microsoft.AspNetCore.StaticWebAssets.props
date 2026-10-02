@@ -72,13 +72,33 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>e5sj6wma7m</Fingerprint>
-      <Integrity>QjtV4PjEEQNV0sojzKff8sJwfNmHLzGDFDiaTrn0iN4=</Integrity>
+      <Fingerprint>j5kdxxyho3</Fingerprint>
+      <Integrity>R+zcDSZ3YzlI9bXOPl/KmpubbboU94QbB4RZKlmwdSk=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <FileLength>861</FileLength>
-      <LastWriteTime>Wed, 30 Sep 2026 08:16:59 GMT</LastWriteTime>
+      <FileLength>905</FileLength>
+      <LastWriteTime>Thu, 01 Oct 2026 05:51:21 GMT</LastWriteTime>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\index.html'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\parserInterop.js'))">
+      <SourceType>Package</SourceType>
+      <SourceId>StoryGameTools</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>/</BasePath>
+      <RelativePath>parserInterop.js</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>phq2tth01d</Fingerprint>
+      <Integrity>YywNQDn53IfcX19hpHJ8oJBu5NiD/uTEQvwHQcd0vHc=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <FileLength>1084</FileLength>
+      <LastWriteTime>Thu, 01 Oct 2026 05:50:50 GMT</LastWriteTime>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\parserInterop.js'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\StoryGameTools.styles.css'))">
       <SourceType>Package</SourceType>
@@ -92,12 +112,12 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName>ScopedCss</AssetTraitName>
       <AssetTraitValue>ApplicationBundle</AssetTraitValue>
-      <Fingerprint>beoxrw0yu3</Fingerprint>
-      <Integrity>w/QOUKTtvCsxeieHNYDzY6/JvyN18F+jav2YfnXzs4w=</Integrity>
+      <Fingerprint>qo28frsl5i</Fingerprint>
+      <Integrity>mnpDFd45Qm8rFOO8Vqg2gfaSGGcHDaiN0umaI1PkKGI=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <FileLength>6685</FileLength>
-      <LastWriteTime>Wed, 30 Sep 2026 15:00:58 GMT</LastWriteTime>
+      <FileLength>8819</FileLength>
+      <LastWriteTime>Fri, 02 Oct 2026 05:01:52 GMT</LastWriteTime>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\StoryGameTools.styles.css'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>

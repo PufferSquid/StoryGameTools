@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\index.html"
     },
     {
+      "Id": "C:\\Users\\User\\Documents\\CodeProjects\\StoryGameTools\\wwwroot\\parserInterop.js",
+      "PackagePath": "staticwebassets\\parserInterop.js"
+    },
+    {
       "Id": "obj\\Debug\\net9.0-android\\staticwebassets\\msbuild.StoryGameTools.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },

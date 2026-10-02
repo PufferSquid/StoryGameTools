@@ -240,3 +240,111 @@ main[b-5oy8wf4ykj] {
     color: #aaa;
     margin: 0;
 }
+/* /Components/Pages/Parser.razor.rz.scp.css */
+.parser-page[b-j4348gnrme] {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.toolbar[b-j4348gnrme] {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.save-confirmation[b-j4348gnrme] {
+    font-size: 0.85rem;
+    color: #6fcf97;
+}
+
+.warnings-panel[b-j4348gnrme] {
+    background: #2a1a1a;
+    border: 1px solid #7c3030;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    color: #f2994a;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.warning-item + .warning-item[b-j4348gnrme] {
+    margin-top: 0.25rem;
+}
+
+.drop-zone[b-j4348gnrme] {
+    flex: 1;
+    border: 2px dashed #333;
+    border-radius: 8px;
+    padding: 1rem;
+    transition: border-color 0.15s;
+    overflow-y: auto;
+}
+
+.drop-zone.dragging[b-j4348gnrme] {
+    border-color: #7c5cbf;
+    background: rgba(124, 92, 191, 0.05);
+}
+
+.drop-hint[b-j4348gnrme] {
+    color: #555;
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.columns[b-j4348gnrme] {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.column h3[b-j4348gnrme] {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 0.75rem;
+}
+
+.script-block[b-j4348gnrme] {
+    border: 1px solid #2a2a2a;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.script-block-header[b-j4348gnrme] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 0.75rem;
+    background: #1a1a1a;
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+.btn-remove[b-j4348gnrme] {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 0.75rem;
+    padding: 0;
+}
+
+.btn-remove:hover[b-j4348gnrme] {
+    color: #f2994a;
+}
+
+.script-text[b-j4348gnrme] {
+    padding: 0.75rem;
+    margin: 0;
+    font-size: 0.8rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+    color: #ccc;
+}

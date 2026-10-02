@@ -16,6 +16,21 @@ namespace StoryGameTools.Components.Services
         public string? LastOpenedProjectPath { get; set; }
     }
 
+    public class ScriptFile
+    {
+        public string FileName { get; set; } = "";
+        public string InputText { get; set; } = "";
+        public string? OutputText { get; set; }
+        public List<string> Warnings { get; set; } = new();
+        public bool HasOutput => OutputText != null;
+    }
+
+    public class DroppedFile
+    {
+        public string Name { get; set; } = "";
+        public string Base64 { get; set; } = "";
+    }
+
     public class CharacterDatabase
     {
         public Dictionary<string, CharacterEntry> Characters { get; set; } = new();
