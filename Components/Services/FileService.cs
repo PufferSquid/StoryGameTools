@@ -29,6 +29,15 @@ namespace StoryGameTools.Components.Services
             browserFiles = (List<IBrowserFile>)e.GetMultipleFiles();
         }
 
+        public async Task OpenFolderInExplorer(string folderPath)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "explorer.exe",
+                Arguments = $"\"{folderPath}\"",
+                UseShellExecute = true
+            });
+        }
 
 
         public async Task ConvertDocuments(List<IBrowserFile> browserFiles)

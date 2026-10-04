@@ -12,12 +12,12 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>e5tk7yf482</Fingerprint>
-      <Integrity>bhCZyC/yM2+DaFXr8z25+5MeWfXWqMJNNA4ZLAXbjjU=</Integrity>
+      <Fingerprint>yzliim4r6s</Fingerprint>
+      <Integrity>3qkXGg1JqIFy0GKoMfUUgog/uVFpVsSDdmUBXDpQf1o=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <FileLength>3376</FileLength>
-      <LastWriteTime>Wed, 30 Sep 2026 08:16:59 GMT</LastWriteTime>
+      <FileLength>6173</FileLength>
+      <LastWriteTime>Sat, 03 Oct 2026 19:49:16 GMT</LastWriteTime>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\app.css'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\bootstrap\bootstrap.min.css'))">
@@ -72,12 +72,12 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>j5kdxxyho3</Fingerprint>
-      <Integrity>R+zcDSZ3YzlI9bXOPl/KmpubbboU94QbB4RZKlmwdSk=</Integrity>
+      <Fingerprint>yjcwsgmg0d</Fingerprint>
+      <Integrity>crzNS+5vHwS0HAd1yg29MT7AWIv7ywYBD/fD+pHStMM=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <FileLength>905</FileLength>
-      <LastWriteTime>Thu, 01 Oct 2026 05:51:21 GMT</LastWriteTime>
+      <FileLength>913</FileLength>
+      <LastWriteTime>Fri, 02 Oct 2026 05:51:10 GMT</LastWriteTime>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\index.html'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\parserInterop.js'))">
@@ -92,12 +92,12 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>phq2tth01d</Fingerprint>
-      <Integrity>YywNQDn53IfcX19hpHJ8oJBu5NiD/uTEQvwHQcd0vHc=</Integrity>
+      <Fingerprint>4a8h1n3g8a</Fingerprint>
+      <Integrity>LNGLUYBbm1F7wPsXUajzYW+hX3haOne2IvbcElOtC7I=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <FileLength>1084</FileLength>
-      <LastWriteTime>Thu, 01 Oct 2026 05:50:50 GMT</LastWriteTime>
+      <FileLength>1088</FileLength>
+      <LastWriteTime>Sat, 03 Oct 2026 19:20:03 GMT</LastWriteTime>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\parserInterop.js'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\StoryGameTools.styles.css'))">
@@ -112,12 +112,12 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName>ScopedCss</AssetTraitName>
       <AssetTraitValue>ApplicationBundle</AssetTraitValue>
-      <Fingerprint>qo28frsl5i</Fingerprint>
-      <Integrity>mnpDFd45Qm8rFOO8Vqg2gfaSGGcHDaiN0umaI1PkKGI=</Integrity>
+      <Fingerprint>i8e90r1thq</Fingerprint>
+      <Integrity>Ukx7jfpxfSFr91g57b5StOpbGsWtULoNyRdJlUtmJ04=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <FileLength>8819</FileLength>
-      <LastWriteTime>Fri, 02 Oct 2026 05:01:52 GMT</LastWriteTime>
+      <FileLength>8822</FileLength>
+      <LastWriteTime>Fri, 02 Oct 2026 05:43:24 GMT</LastWriteTime>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\StoryGameTools.styles.css'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>

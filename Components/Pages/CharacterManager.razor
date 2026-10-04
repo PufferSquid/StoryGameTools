@@ -1,0 +1,219 @@
+@page "/character-manager"
+@using StoryGameTools.Components.Services
+@using StoryGameTools.Components.Shared
+@inject ProjectService ProjectService
+@inject CharacterDatabaseService CharacterService
+@implements IDisposable
+
+<PageTitle>Characters</PageTitle>
+
+<div class="characters-page">
+    <div class="toolbar">
+        <button class="btn btn-primary" @onclick="OpenAddCharacter">+ Add Character</button>
+        <button class="btn btn-secondary" @onclick="Reload">Reload</button>
+        @if (!string.IsNullOrEmpty(_statusMessage))
+        {
+            <span class="status @(_statusIsError ? "error" : "")">@_statusMessage</span>
+        }
+    </div>
+
+    @if (ProjectService.ActiveProjectPath == null)
+    {
+        <div class="empty-state">
+            <p>No project is open. Please open or create a project first.</p>
+        </div>
+    }
+    else if (_loading)
+    {
+        <p>Loading…</p>
+    }
+    else if (_database.Characters.Count == 0)
+    {
+        <div class="empty-state">
+            <p>No characters yet. Click "Add Character" to get started.</p>
+        </div>
+    }
+    else
+    {
+        <div class="characters-layout">
+            <aside class="character-list">
+                @foreach (var kvp in _database.Characters.OrderBy(c => c.Value.DisplayName))
+                {
+                    <button class="character-item @(kvp.Key == _selectedId ? "selected" : "")"
+                            @onclick="() => SelectCharacter(kvp.Key)">
+                        <span class="char-name">@kvp.Value.DisplayName</span>
+                        <span class="char-id">@kvp.Key</span>
+                    </button>
+                }
+            </aside>
+
+            <section class="character-detail">
+                @if (_selectedId != null && _database.Characters.TryGetValue(_selectedId, out var entry))
+                {
+                    <CharacterEditor CharacterId="_selectedId"
+                                     Entry="entry"
+                                     OnSave="OnCharacterSaved"
+                                     OnDelete="OnCharacterDeleted"
+                                     OnEmotionChanged="OnEmotionChanged" />
+                }
+            </section>
+        </div>
+    }
+</div>
+
+@if (_showAddDialog)
+{
+    <div class="modal-backdrop" @onclick="CloseAddDialog">
+        <div class="modal" @onclick:stopPropagation>
+            <h3>Add Character</h3>
+            <label>
+                Character ID (used in scripts)
+                <input @bind="_newId" @bind:event="oninput" placeholder="sarah" />
+            </label>
+            <label>
+                Display Name
+                <input @bind="_newDisplayName" @bind:event="oninput" placeholder="Sarah" />
+            </label>
+            @if (!string.IsNullOrEmpty(_addError))
+            {
+                <p class="error">@_addError</p>
+            }
+            <div class="modal-actions">
+                <button class="btn btn-secondary" @onclick="CloseAddDialog">Cancel</button>
+                <button class="btn btn-primary" @onclick="ConfirmAddCharacter">Add</button>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private CharacterDatabase _database = new();
+    private bool _loading = true;
+    private string? _selectedId;
+    private string? _statusMessage;
+    private bool _statusIsError;
+
+    private bool _showAddDialog;
+    private string _newId = "";
+    private string _newDisplayName = "";
+    private string? _addError;
+
+    protected override async Task OnInitializedAsync()
+    {
+        ProjectService.ActiveProjectChanged += OnProjectChanged;
+        await LoadDatabaseAsync();
+    }
+
+    public void Dispose()
+    {
+        ProjectService.ActiveProjectChanged -= OnProjectChanged;
+    }
+
+    private async void OnProjectChanged()
+    {
+        await InvokeAsync(async () =>
+        {
+            await LoadDatabaseAsync();
+            StateHasChanged();
+        });
+    }
+
+    private async Task LoadDatabaseAsync()
+    {
+        _loading = true;
+        _selectedId = null;
+        _database = await CharacterService.LoadAsync();
+        _loading = false;
+    }
+
+    private async Task Reload()
+    {
+        await LoadDatabaseAsync();
+        SetStatus("Reloaded.", false);
+    }
+
+    private void SelectCharacter(string id)
+    {
+        _selectedId = id;
+        ClearStatus();
+    }
+
+    private void OpenAddCharacter()
+    {
+        _newId = "";
+        _newDisplayName = "";
+        _addError = null;
+        _showAddDialog = true;
+    }
+
+    private void CloseAddDialog() => _showAddDialog = false;
+
+    private async Task ConfirmAddCharacter()
+    {
+        var id = CharacterDatabaseService.NormalizeId(_newId);
+        if (string.IsNullOrWhiteSpace(id))
+        {
+            _addError = "Character ID is required.";
+            return;
+        }
+        if (_database.Characters.ContainsKey(id))
+        {
+            _addError = $"Character '{id}' already exists.";
+            return;
+        }
+
+        try
+        {
+            await CharacterService.AddCharacterAsync(id, _newDisplayName);
+            _showAddDialog = false;
+            await LoadDatabaseAsync();
+            _selectedId = id;
+            SetStatus($"Added '{id}'.", false);
+        }
+        catch (Exception ex)
+        {
+            _addError = ex.Message;
+        }
+    }
+
+    private async Task OnCharacterSaved()
+    {
+        var selected = _selectedId;
+        await LoadDatabaseAsync();
+        _selectedId = selected;
+        SetStatus("Saved.", false);
+    }
+
+    private async Task OnCharacterDeleted()
+    {
+        _selectedId = null;
+        await LoadDatabaseAsync();
+        SetStatus("Character deleted.", false);
+    }
+
+    private async Task OnEmotionChanged()
+    {
+        var selected = _selectedId;
+        await LoadDatabaseAsync();
+        _selectedId = selected;
+    }
+
+    private void SetStatus(string message, bool isError)
+    {
+        _statusMessage = message;
+        _statusIsError = isError;
+        _ = ClearStatusAfterDelay();
+    }
+
+    private void ClearStatus() => _statusMessage = null;
+
+    private async Task ClearStatusAfterDelay()
+    {
+        await Task.Delay(3000);
+        await InvokeAsync(() =>
+        {
+            _statusMessage = null;
+            StateHasChanged();
+        });
+    }
+}

@@ -1,0 +1,259 @@
+@using StoryGameTools.Components.Services
+@inject CharacterDatabaseService CharacterService
+@inject ProjectService ProjectService
+
+<div class="character-editor">
+    <div class="editor-header">
+        <h2>@Entry.DisplayName</h2>
+        <div class="header-actions">
+            <button class="btn btn-secondary" @onclick="ToggleEditIdentity">Edit</button>
+            <button class="btn btn-danger" @onclick="ConfirmDelete">Delete Character</button>
+        </div>
+    </div>
+
+    @if (_editingIdentity)
+    {
+        <div class="identity-editor">
+            <label>
+                Character ID
+                <input @bind="_editId" @bind:event="oninput" />
+            </label>
+            <label>
+                Display Name
+                <input @bind="_editDisplayName" @bind:event="oninput" />
+            </label>
+            <button class="btn btn-primary" @onclick="SaveIdentity">Save</button>
+            <button class="btn btn-secondary" @onclick="ToggleEditIdentity">Cancel</button>
+            @if (!string.IsNullOrEmpty(_identityError))
+            {
+                <p class="error">@_identityError</p>
+            }
+        </div>
+    }
+
+    <h3>Emotions</h3>
+    <div class="emotions-grid">
+        @foreach (var kvp in Entry.Emotions.OrderBy(e => e.Key))
+        {
+            <div class="emotion-card">
+                <div class="emotion-preview">
+                    @if (TryGetImageUrl(kvp.Value, out var url))
+                    {
+                        <img src="@url" alt="@kvp.Key" />
+                    }
+                    else
+                    {
+                        <div class="missing-image">No image</div>
+                    }
+                </div>
+                <div class="emotion-meta">
+                    <span class="emotion-name">@kvp.Key</span>
+                    @if (kvp.Key == "default")
+                    {
+                        <span class="badge">default</span>
+                    }
+                </div>
+                <div class="emotion-actions">
+                    <button class="btn btn-sm" @onclick="() => EditEmotion(kvp.Key)">Edit</button>
+                    @if (kvp.Key != "default")
+                    {
+                        <button class="btn btn-sm" @onclick="() => SetDefault(kvp.Key)">Set Default</button>
+                        <button class="btn btn-sm btn-danger" @onclick="() => RemoveEmotion(kvp.Key)">Remove</button>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="add-emotion">
+        <h4>Add Emotion</h4>
+        <label>
+            Emotion name
+            <input @bind="_newEmotionName" @bind:event="oninput" placeholder="happy" />
+        </label>
+        <label>
+            Relative path (from project root)
+            <input @bind="_newEmotionPath" @bind:event="oninput" placeholder="images/sarah/happy.png" />
+        </label>
+        <button class="btn btn-primary" @onclick="AddEmotion">Add Emotion</button>
+        @if (!string.IsNullOrEmpty(_emotionError))
+        {
+            <p class="error">@_emotionError</p>
+        }
+    </div>
+
+    @if (_editingEmotion != null)
+    {
+        <div class="modal-backdrop" @onclick="CancelEditEmotion">
+            <div class="modal" @onclick:stopPropagation>
+                <h3>Edit Emotion: @_editingEmotion</h3>
+                <label>
+                    Relative path
+                    <input @bind="_editEmotionPath" @bind:event="oninput" />
+                </label>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" @onclick="CancelEditEmotion">Cancel</button>
+                    <button class="btn btn-primary" @onclick="SaveEmotionEdit">Save</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public string CharacterId { get; set; } = "";
+    [Parameter] public CharacterEntry Entry { get; set; } = new();
+    [Parameter] public EventCallback OnSave { get; set; }
+    [Parameter] public EventCallback OnDelete { get; set; }
+    [Parameter] public EventCallback OnEmotionChanged { get; set; }
+
+    private bool _editingIdentity;
+    private string _editId = "";
+    private string _editDisplayName = "";
+    private string? _identityError;
+
+    private string _newEmotionName = "";
+    private string _newEmotionPath = "";
+    private string? _emotionError;
+
+    private string? _editingEmotion;
+    private string _editEmotionPath = "";
+
+    protected override void OnParametersSet()
+    {
+        _editId = CharacterId;
+        _editDisplayName = Entry.DisplayName;
+    }
+
+    private void ToggleEditIdentity()
+    {
+        _editingIdentity = !_editingIdentity;
+        _identityError = null;
+        _editId = CharacterId;
+        _editDisplayName = Entry.DisplayName;
+    }
+
+    private async Task SaveIdentity()
+    {
+        var newId = CharacterDatabaseService.NormalizeId(_editId);
+        if (string.IsNullOrWhiteSpace(newId))
+        {
+            _identityError = "Character ID is required.";
+            return;
+        }
+
+        try
+        {
+            await CharacterService.RenameCharacterAsync(CharacterId, newId, _editDisplayName);
+            _editingIdentity = false;
+            _identityError = null;
+            await OnSave.InvokeAsync();
+        }
+        catch (Exception ex)
+        {
+            _identityError = ex.Message;
+        }
+    }
+
+    private async Task ConfirmDelete()
+    {
+        await CharacterService.RemoveCharacterAsync(CharacterId);
+        await OnDelete.InvokeAsync();
+    }
+
+    private async Task AddEmotion()
+    {
+        var name = CharacterDatabaseService.NormalizeEmotion(_newEmotionName);
+        var path = CharacterDatabaseService.NormalizePath(_newEmotionPath);
+
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            _emotionError = "Emotion name is required.";
+            return;
+        }
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            _emotionError = "Path is required.";
+            return;
+        }
+        if (Entry.Emotions.ContainsKey(name))
+        {
+            _emotionError = $"Emotion '{name}' already exists.";
+            return;
+        }
+
+        try
+        {
+            await CharacterService.SetEmotionAsync(CharacterId, name, path);
+            _newEmotionName = "";
+            _newEmotionPath = "";
+            _emotionError = null;
+            await OnEmotionChanged.InvokeAsync();
+        }
+        catch (Exception ex)
+        {
+            _emotionError = ex.Message;
+        }
+    }
+
+    private void EditEmotion(string emotion)
+    {
+        _editingEmotion = emotion;
+        _editEmotionPath = Entry.Emotions.TryGetValue(emotion, out var p) ? p : "";
+    }
+
+    private void CancelEditEmotion()
+    {
+        _editingEmotion = null;
+        _editEmotionPath = "";
+    }
+
+    private async Task SaveEmotionEdit()
+    {
+        if (_editingEmotion == null) return;
+        try
+        {
+            await CharacterService.SetEmotionAsync(CharacterId, _editingEmotion, _editEmotionPath);
+            CancelEditEmotion();
+            await OnEmotionChanged.InvokeAsync();
+        }
+        catch (Exception ex)
+        {
+            _emotionError = ex.Message;
+        }
+    }
+
+    private async Task RemoveEmotion(string emotion)
+    {
+        await CharacterService.RemoveEmotionAsync(CharacterId, emotion);
+        await OnEmotionChanged.InvokeAsync();
+    }
+
+    private async Task SetDefault(string emotion)
+    {
+        try
+        {
+            await CharacterService.SetDefaultEmotionAsync(CharacterId, emotion);
+            await OnEmotionChanged.InvokeAsync();
+        }
+        catch (Exception ex)
+        {
+            _emotionError = ex.Message;
+        }
+    }
+
+    private bool TryGetImageUrl(string relativePath, out string url)
+    {
+        url = "";
+        if (string.IsNullOrWhiteSpace(relativePath) || ProjectService.ActiveProjectPath == null)
+            return false;
+
+        var fullPath = Path.Combine(ProjectService.ActiveProjectPath, relativePath);
+        if (!File.Exists(fullPath))
+            return false;
+
+        // Use a file:// URL for Maui hybrid / Blazor WASM
+        url = new Uri(fullPath).AbsoluteUri;
+        return true;
+    }
+}

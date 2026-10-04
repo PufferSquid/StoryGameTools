@@ -5,14 +5,14 @@ Components\Pages\Parser.razor.css
 wwwroot\css\bootstrap\bootstrap.min.css.gz
 wwwroot\css\bootstrap\bootstrap.min.css.map.gz
 wwwroot\css\app.css.gz
-wwwroot\StoryGameTools.qo28frsl5i.bundle.scp.css.gz
+wwwroot\StoryGameTools.i8e90r1thq.bundle.scp.css.gz
 wwwroot\StoryGameTools.styles.css.gz
 wwwroot\index.html.gz
 wwwroot\parserInterop.js.gz
 wwwroot\css\bootstrap\bootstrap.min.css.br
 wwwroot\css\bootstrap\bootstrap.min.css.map.br
 wwwroot\css\app.css.br
-wwwroot\StoryGameTools.qo28frsl5i.bundle.scp.css.br
+wwwroot\StoryGameTools.i8e90r1thq.bundle.scp.css.br
 wwwroot\StoryGameTools.styles.css.br
 wwwroot\index.html.br
 wwwroot\parserInterop.js.br
@@ -74,7 +74,7 @@ splashSplashScreen.scale-150.png
 splashSplashScreen.scale-200.png
 splashSplashScreen.scale-400.png
 wwwroot\StoryGameTools.styles.css
-wwwroot\StoryGameTools.qo28frsl5i.bundle.scp.css
+wwwroot\StoryGameTools.i8e90r1thq.bundle.scp.css
 AboutAssets.txt
 wwwroot\css\app.css
 wwwroot\css\bootstrap\bootstrap.min.css

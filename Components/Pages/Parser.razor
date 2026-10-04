@@ -43,10 +43,10 @@
     }
 
     <div class="drop-zone @(_isDragging ? "dragging" : "")"
+        @ref="_dropZone"
         @ondragover:preventDefault
         @ondragover="() => _isDragging = true"
-        @ondragleave="() => _isDragging = false"
-        @ondrop="OnDrop">
+        @ondragleave="() => _isDragging = false">
         <p class="drop-hint">Drop .txt files here or use Add Files above</p>
     </div>
 
@@ -91,6 +91,25 @@
     private List<(string FileName, string Warning)> _allWarnings = new();
     private bool _isDragging = false;
     private string? _saveConfirmation;
+
+    private ElementReference _dropZone;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        // Retry a few times in case the script hasn't evaluated yet
+        for (int i = 0; i < 5; i++)
+        {
+            try
+            {
+                await JS.InvokeVoidAsync("parserInterop.init", _dropZone);
+                break;
+            }
+            catch (JSException)
+            {
+                await Task.Delay(100);
+            }
+        }
+    }
 
     // Reads files selected via the file picker
     private async Task OnFilesSelected(InputFileChangeEventArgs e)
