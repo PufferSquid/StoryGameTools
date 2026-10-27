@@ -4,7 +4,7 @@
 @inject CharacterDatabaseService CharacterDb
 @inject ProjectService ProjectService
 @inject IJSRuntime JS
-
+@implements IDisposable
 
 
 <div class="parser-page">
@@ -93,22 +93,23 @@
     private string? _saveConfirmation;
 
     private ElementReference _dropZone;
+    private DotNetObjectReference<Parser>? _dotNetRef;
+
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        // Retry a few times in case the script hasn't evaluated yet
-        for (int i = 0; i < 5; i++)
-        {
-            try
-            {
-                await JS.InvokeVoidAsync("parserInterop.init", _dropZone);
-                break;
-            }
-            catch (JSException)
-            {
-                await Task.Delay(100);
-            }
-        }
+        if (!firstRender) return;
+        _dotNetRef = DotNetObjectReference.Create(this);
+        await JS.InvokeVoidAsync("parserInterop.registerDropZone", _dropZone, _dotNetRef);
+    }
+
+    [JSInvokable]
+    public async Task OnFileDropped(string name, string text)
+    {
+        if (_files.Any(f => f.FileName == name)) return;
+        _files.Add(new ScriptFile { FileName = name, InputText = text });
+        _isDragging = false;
+        await InvokeAsync(StateHasChanged);
     }
 
     // Reads files selected via the file picker
@@ -116,22 +117,6 @@
     {
         foreach (var file in e.GetMultipleFiles())
             await LoadFile(file.Name, file.OpenReadStream());
-    }
-
-    // Drag and drop fires an ondrop event — we read the files via JS interop
-    // because Blazor's drag-drop API doesn't expose file contents directly
-    private async Task OnDrop(DragEventArgs e)
-    {
-        _isDragging = false;
-        // JS interop call reads the dropped files and returns them as base64
-        // We'll wire this up in wwwroot/parserInterop.js
-        var results = await JS.InvokeAsync<List<DroppedFile>>("parserInterop.getDroppedFiles");
-        foreach (var dropped in results)
-        {
-            var bytes = Convert.FromBase64String(dropped.Base64);
-            var stream = new MemoryStream(bytes);
-            await LoadFile(dropped.Name, stream);
-        }
     }
 
     private async Task LoadFile(string name, Stream stream)
@@ -175,5 +160,10 @@
     {
         _files.Remove(file);
         _allWarnings.RemoveAll(w => w.FileName == file.FileName);
+    }
+
+    public void Dispose()
+    {
+        _dotNetRef?.Dispose();
     }
 }

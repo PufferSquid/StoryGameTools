@@ -1,0 +1,24 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build: Windows",
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "${workspaceFolder}/StoryGameTools.csproj",
+                "--configuration",
+                "Debug",
+                "-p:TargetFrameworks=net9.0-windows10.0.19041.0",
+                "-p:RuntimeIdentifier=win-x64",
+                "-p:MSBuildProjectExtensionsPath=${workspaceFolder}/obj/windows-debug/"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

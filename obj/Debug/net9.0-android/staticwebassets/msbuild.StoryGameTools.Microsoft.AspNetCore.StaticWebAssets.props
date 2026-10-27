@@ -12,12 +12,12 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>e5tk7yf482</Fingerprint>
-      <Integrity>bhCZyC/yM2+DaFXr8z25+5MeWfXWqMJNNA4ZLAXbjjU=</Integrity>
+      <Fingerprint>gq8n4tlppv</Fingerprint>
+      <Integrity>CMwOJPT7KtG6KY7eqdG/1RxaBsgiTk2x2cjVwY7sLRg=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <FileLength>3376</FileLength>
-      <LastWriteTime>Wed, 30 Sep 2026 08:16:59 GMT</LastWriteTime>
+      <FileLength>5196</FileLength>
+      <LastWriteTime>Sun, 04 Oct 2026 07:18:25 GMT</LastWriteTime>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\app.css'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\bootstrap\bootstrap.min.css'))">
@@ -60,6 +60,26 @@
       <LastWriteTime>Wed, 30 Sep 2026 08:16:59 GMT</LastWriteTime>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\bootstrap\bootstrap.min.css.map'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\imageDrop.js'))">
+      <SourceType>Package</SourceType>
+      <SourceId>StoryGameTools</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>/</BasePath>
+      <RelativePath>imageDrop.js</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>hn1v5d1u9j</Fingerprint>
+      <Integrity>49zvOl8psni6ocWhz9TTEncaAJhs3505R9eayyihQWE=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <FileLength>1147</FileLength>
+      <LastWriteTime>Sun, 04 Oct 2026 07:16:42 GMT</LastWriteTime>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\imageDrop.js'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\index.html'))">
       <SourceType>Package</SourceType>
       <SourceId>StoryGameTools</SourceId>
@@ -72,12 +92,12 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>yjcwsgmg0d</Fingerprint>
-      <Integrity>crzNS+5vHwS0HAd1yg29MT7AWIv7ywYBD/fD+pHStMM=</Integrity>
+      <Fingerprint>cfucxulus8</Fingerprint>
+      <Integrity>+BFm3Y+tlFv9Qx7JWGxeBCufVwN7yIRXEDLl69jIKWg=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <FileLength>913</FileLength>
-      <LastWriteTime>Fri, 02 Oct 2026 05:51:10 GMT</LastWriteTime>
+      <FileLength>949</FileLength>
+      <LastWriteTime>Sun, 04 Oct 2026 07:24:32 GMT</LastWriteTime>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\index.html'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\parserInterop.js'))">
@@ -92,12 +112,12 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>4a8h1n3g8a</Fingerprint>
-      <Integrity>LNGLUYBbm1F7wPsXUajzYW+hX3haOne2IvbcElOtC7I=</Integrity>
+      <Fingerprint>o1h5pbiyca</Fingerprint>
+      <Integrity>dLU+FPwxww7wUxmFgT3g7a2Tq/+4vIBa9LnJhCPIsjE=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <FileLength>1088</FileLength>
-      <LastWriteTime>Sat, 03 Oct 2026 19:20:03 GMT</LastWriteTime>
+      <FileLength>632</FileLength>
+      <LastWriteTime>Sun, 04 Oct 2026 06:21:08 GMT</LastWriteTime>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\parserInterop.js'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\StoryGameTools.styles.css'))">

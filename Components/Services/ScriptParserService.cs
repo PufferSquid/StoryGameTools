@@ -126,9 +126,13 @@ namespace StoryGameTools.Components.Services
         }
 
         private void EmitEmotionCall(string character, string tagContent, CharacterDatabase db,
-    List<string> warnings, int lineNum, StringBuilder output)
+            List<string> warnings, int lineNum, StringBuilder output)
         {
-            var parts = tagContent.Split(',').Select(p => p.Trim()).Where(p => p.Length > 0).ToList();
+            var parts = tagContent.Split(',')
+                .Select(CharacterDatabaseService.NormalizeEmotion)
+                .Where(p => p.Length > 0)
+                .ToList();
+
             var charKey = character.ToLowerInvariant();
 
             if (parts.Count == 1)

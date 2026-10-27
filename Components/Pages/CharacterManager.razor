@@ -51,10 +51,11 @@
                 @if (_selectedId != null && _database.Characters.TryGetValue(_selectedId, out var entry))
                 {
                     <CharacterEditor CharacterId="_selectedId"
-                                     Entry="entry"
-                                     OnSave="OnCharacterSaved"
-                                     OnDelete="OnCharacterDeleted"
-                                     OnEmotionChanged="OnEmotionChanged" />
+                                    Entry="entry"
+                                    GlobalEmotions="_database.GlobalEmotions"
+                                    OnSave="OnCharacterSaved"
+                                    OnDelete="OnCharacterDeleted"
+                                    OnEmotionChanged="OnEmotionChanged" />
                 }
             </section>
         </div>
@@ -98,6 +99,7 @@
     private string _newDisplayName = "";
     private string? _addError;
 
+
     protected override async Task OnInitializedAsync()
     {
         ProjectService.ActiveProjectChanged += OnProjectChanged;
@@ -128,6 +130,11 @@
 
     private async Task Reload()
     {
+        var scripts = ProjectService.GetProjectPath("dialogueScripts");
+        if (scripts != null)
+            await CharacterService.SyncGlobalEmotionsAsync(
+                CharacterService.ScanEmotionsFromScripts(scripts));
+
         await LoadDatabaseAsync();
         SetStatus("Reloaded.", false);
     }

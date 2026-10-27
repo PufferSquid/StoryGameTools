@@ -17,7 +17,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StoryGameTools")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+1c14e32b29c82891d984ad6325a9bb43503057cb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+a69aefe0e8f6ba3d618d2f2a665cbb07ca6062ed")]
 [assembly: System.Reflection.AssemblyProductAttribute("StoryGameTools")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StoryGameTools")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

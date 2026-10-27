@@ -25,14 +25,9 @@ namespace StoryGameTools.Components.Services
         public bool HasOutput => OutputText != null;
     }
 
-    public class DroppedFile
-    {
-        public string Name { get; set; } = "";
-        public string Base64 { get; set; } = "";
-    }
-
     public class CharacterDatabase
     {
+        public List<string> GlobalEmotions { get; set; } = new();
         public Dictionary<string, CharacterEntry> Characters { get; set; } = new();
     }
 

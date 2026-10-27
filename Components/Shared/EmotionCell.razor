@@ -1,0 +1,67 @@
+@using StoryGameTools.Components.Services
+@inject CharacterDatabaseService CharacterService
+@inject IJSRuntime JS
+@implements IAsyncDisposable
+
+<div class="emotion-cell @(ImagePath == null ? "empty" : "")" @ref="_root">
+    <div class="cell-image">
+        @if (ImageUrl != null)
+        {
+            <img src="@ImageUrl" alt="@Emotion" />
+        }
+        else
+        {
+            <span class="drop-prompt">Drop PNG here</span>
+        }
+    </div>
+
+    @if (ImagePath != null)
+    {
+        <input class="cell-name" value="@Emotion" @onchange="OnRename" />
+    }
+    else
+    {
+        <span class="cell-name">@Emotion</span>
+    }
+</div>
+
+@code {
+    [Parameter] public string CharacterId { get; set; } = "";
+    [Parameter] public string Emotion { get; set; } = "";
+    [Parameter] public string? ImagePath { get; set; }
+    [Parameter] public string? ProjectRoot { get; set; }
+    [Parameter] public EventCallback OnChanged { get; set; }
+
+    private ElementReference _root;
+    private DotNetObjectReference<EmotionCell>? _dotNetRef;
+
+    private string? ImageUrl =>
+        ImagePath == null || ProjectRoot == null ? null
+        : File.Exists(Path.Combine(ProjectRoot, ImagePath))
+            ? new Uri(Path.Combine(ProjectRoot, ImagePath)).AbsoluteUri
+            : null;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+        _dotNetRef = DotNetObjectReference.Create(this);
+        await JS.InvokeVoidAsync("imageDrop.register", _root, _dotNetRef);
+    }
+
+    [JSInvokable]
+    public async Task OnImageDropped(string base64)
+    {
+        await CharacterService.AssignImageAsync(
+            CharacterId, Emotion, Convert.FromBase64String(base64));
+        await OnChanged.InvokeAsync();
+    }
+
+    private async Task OnRename(ChangeEventArgs e)
+    {
+        await CharacterService.RenameEmotionAsync(
+            CharacterId, Emotion, e.Value?.ToString() ?? "");
+        await OnChanged.InvokeAsync();
+    }
+
+    public async ValueTask DisposeAsync() => _dotNetRef?.Dispose();
+}

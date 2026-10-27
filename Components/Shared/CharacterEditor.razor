@@ -32,54 +32,40 @@
     }
 
     <h3>Emotions</h3>
-    <div class="emotions-grid">
-        @foreach (var kvp in Entry.Emotions.OrderBy(e => e.Key))
-        {
-            <div class="emotion-card">
-                <div class="emotion-preview">
-                    @if (TryGetImageUrl(kvp.Value, out var url))
-                    {
-                        <img src="@url" alt="@kvp.Key" />
-                    }
-                    else
-                    {
-                        <div class="missing-image">No image</div>
-                    }
-                </div>
-                <div class="emotion-meta">
-                    <span class="emotion-name">@kvp.Key</span>
-                    @if (kvp.Key == "default")
-                    {
-                        <span class="badge">default</span>
-                    }
-                </div>
-                <div class="emotion-actions">
-                    <button class="btn btn-sm" @onclick="() => EditEmotion(kvp.Key)">Edit</button>
-                    @if (kvp.Key != "default")
-                    {
-                        <button class="btn btn-sm" @onclick="() => SetDefault(kvp.Key)">Set Default</button>
-                        <button class="btn btn-sm btn-danger" @onclick="() => RemoveEmotion(kvp.Key)">Remove</button>
-                    }
-                </div>
+    <div class="emotion-workspace">
+        <section class="owned-panel">
+            <h4>Assigned</h4>
+            <div class="owned-grid">
+                @foreach (var kvp in Entry.Emotions
+                                        .Where(e => e.Key != "default")
+                                        .OrderBy(e => e.Key))
+                {
+                    <EmotionCell @key="kvp.Key"
+                                CharacterId="@CharacterId"
+                                Emotion="@kvp.Key"
+                                ImagePath="@kvp.Value"
+                                ProjectRoot="@ProjectService.ActiveProjectPath"
+                                OnChanged="@OnEmotionChanged" />
+                }
             </div>
-        }
-    </div>
+        </section>
 
-    <div class="add-emotion">
-        <h4>Add Emotion</h4>
-        <label>
-            Emotion name
-            <input @bind="_newEmotionName" @bind:event="oninput" placeholder="happy" />
-        </label>
-        <label>
-            Relative path (from project root)
-            <input @bind="_newEmotionPath" @bind:event="oninput" placeholder="images/sarah/happy.png" />
-        </label>
-        <button class="btn btn-primary" @onclick="AddEmotion">Add Emotion</button>
-        @if (!string.IsNullOrEmpty(_emotionError))
-        {
-            <p class="error">@_emotionError</p>
-        }
+        <section class="available-panel">
+            <h4>Unassigned</h4>
+            <div class="available-grid">
+                @foreach (var emo in GlobalEmotions
+                                        .Except(Entry.Emotions.Keys)
+                                        .OrderBy(e => e))
+                {
+                    <EmotionCell @key="emo"
+                                CharacterId="@CharacterId"
+                                Emotion="@emo"
+                                ImagePath="@null"
+                                ProjectRoot=@ProjectService.ActiveProjectPath"
+                                OnChanged="@OnEmotionChanged" />
+                }
+            </div>
+        </section>
     </div>
 
     @if (_editingEmotion != null)
@@ -106,6 +92,7 @@
     [Parameter] public EventCallback OnSave { get; set; }
     [Parameter] public EventCallback OnDelete { get; set; }
     [Parameter] public EventCallback OnEmotionChanged { get; set; }
+    [Parameter] public List<string> GlobalEmotions { get; set; } = new();
 
     private bool _editingIdentity;
     private string _editId = "";

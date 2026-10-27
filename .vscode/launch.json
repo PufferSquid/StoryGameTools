@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "StoryGameTools (Windows)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build: Windows",
+            "program": "${workspaceFolder}/bin/Debug/net9.0-windows10.0.19041.0/win-x64/StoryGameTools.dll",
+            "cwd": "${workspaceFolder}/bin/Debug/net9.0-windows10.0.19041.0/win-x64",
+            "stopAtEntry": false
+        }
+    ]
+}

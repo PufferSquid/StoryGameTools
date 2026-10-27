@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace StoryGameTools.Components.Services
@@ -10,6 +11,12 @@ namespace StoryGameTools.Components.Services
     public class CharacterDatabaseService
     {
         private readonly ProjectService _projectService;
+
+        private static readonly Regex EmotionCallRegex =
+            new(@"\{(ChangeCharacter|Swap\d*)\(([^)]*)\)\}");
+        private static readonly Regex QuotedArgRegex = new(@"""([^""]*)""");
+
+
         private static readonly JsonSerializerOptions JsonOptions = new()
         {
             PropertyNameCaseInsensitive = true,
@@ -57,7 +64,7 @@ namespace StoryGameTools.Components.Services
             await SaveAsync(db);
             return entry;
         }
-
+        
         public async Task RemoveCharacterAsync(string id)
         {
             var db = await LoadAsync();
@@ -87,6 +94,23 @@ namespace StoryGameTools.Components.Services
             }
 
             entry.DisplayName = displayName;
+            await SaveAsync(db);
+        }
+
+        public async Task RenameEmotionAsync(string characterId, string oldEmotion, string newEmotion)
+        {
+            var db = await LoadAsync();
+            var entry = db.Characters[NormalizeId(characterId)];
+            var oldKey = NormalizeEmotion(oldEmotion);
+            var newKey = NormalizeEmotion(newEmotion);
+
+            if (newKey == oldKey) return;
+            if (entry.Emotions.ContainsKey(newKey))
+                throw new InvalidOperationException($"'{newKey}' already exists on this character.");
+
+            entry.Emotions[newKey] = entry.Emotions[oldKey];
+            entry.Emotions.Remove(oldKey);
+            if (!db.GlobalEmotions.Contains(newKey)) db.GlobalEmotions.Add(newKey);
             await SaveAsync(db);
         }
 
@@ -126,6 +150,63 @@ namespace StoryGameTools.Components.Services
                 throw new InvalidOperationException($"Emotion '{emo}' not found on '{key}'.");
 
             entry.Emotions["default"] = path;
+            await SaveAsync(db);
+        }
+
+        public HashSet<string> ScanEmotionsFromScripts(string scriptsFolder)
+        {
+            var found = new HashSet<string>();
+            foreach (var file in Directory.GetFiles(scriptsFolder, "*.ink"))
+            {
+                var text = File.ReadAllText(file);
+                foreach (Match call in EmotionCallRegex.Matches(text))
+                {
+                    var args = QuotedArgRegex.Matches(call.Groups[2].Value)
+                                            .Select(m => NormalizeEmotion(m.Groups[1].Value))
+                                            .Skip(1); // first quoted arg is the character id
+                    foreach (var emo in args)
+                        if (emo != "default") found.Add(emo);
+                }
+            }
+            return found;
+        }
+
+        public async Task SyncGlobalEmotionsAsync(IEnumerable<string> scriptEmotions)
+        {
+            var db = await LoadAsync();
+            db.GlobalEmotions = db.GlobalEmotions
+                .Concat(scriptEmotions)
+                .Concat(db.Characters.Values.SelectMany(c => c.Emotions.Keys))
+                .Select(NormalizeEmotion)
+                .Where(e => e != "default")
+                .Distinct()
+                .OrderBy(e => e)
+                .ToList();
+            await SaveAsync(db);
+        }
+
+
+        public async Task AssignImageAsync(string characterId, string emotion, byte[] pngBytes)
+        {
+            var db = await LoadAsync();
+            var charKey = NormalizeId(characterId);
+            var emoKey = NormalizeEmotion(emotion);
+
+            if (!db.Characters.TryGetValue(charKey, out var entry))
+                throw new InvalidOperationException($"Character '{charKey}' not found.");
+
+            var relative = $"images/{charKey}/{charKey}_{emoKey}.png";
+
+            // Overwriting would silently change any other emotion pointing at this file.
+            if (entry.Emotions.Any(e => e.Key != emoKey && e.Value == relative))
+                throw new InvalidOperationException($"'{relative}' is shared with another emotion.");
+
+            var fullPath = _projectService.GetProjectPath(relative)
+                ?? throw new InvalidOperationException("No active project.");
+            Directory.CreateDirectory(Path.GetDirectoryName(fullPath)!);
+            await File.WriteAllBytesAsync(fullPath, pngBytes);
+
+            entry.Emotions[emoKey] = relative;
             await SaveAsync(db);
         }
 

@@ -4,6 +4,7 @@ Components\Pages\Dashboard.razor.css
 Components\Pages\Parser.razor.css
 wwwroot\css\bootstrap\bootstrap.min.css.gz
 wwwroot\css\bootstrap\bootstrap.min.css.map.gz
+wwwroot\imageDrop.js.gz
 wwwroot\css\app.css.gz
 wwwroot\StoryGameTools.i8e90r1thq.bundle.scp.css.gz
 wwwroot\StoryGameTools.styles.css.gz
@@ -11,6 +12,7 @@ wwwroot\index.html.gz
 wwwroot\parserInterop.js.gz
 wwwroot\css\bootstrap\bootstrap.min.css.br
 wwwroot\css\bootstrap\bootstrap.min.css.map.br
+wwwroot\imageDrop.js.br
 wwwroot\css\app.css.br
 wwwroot\StoryGameTools.i8e90r1thq.bundle.scp.css.br
 wwwroot\StoryGameTools.styles.css.br
@@ -79,5 +81,6 @@ AboutAssets.txt
 wwwroot\css\app.css
 wwwroot\css\bootstrap\bootstrap.min.css
 wwwroot\css\bootstrap\bootstrap.min.css.map
+wwwroot\imageDrop.js
 wwwroot\index.html
 wwwroot\parserInterop.js

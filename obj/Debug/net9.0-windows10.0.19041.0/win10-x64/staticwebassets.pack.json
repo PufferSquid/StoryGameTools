@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
+      "Id": "C:\\Users\\User\\Documents\\CodeProjects\\StoryGameTools\\wwwroot\\imageDrop.js",
+      "PackagePath": "staticwebassets\\imageDrop.js"
+    },
+    {
       "Id": "C:\\Users\\User\\Documents\\CodeProjects\\StoryGameTools\\wwwroot\\index.html",
       "PackagePath": "staticwebassets\\index.html"
     },

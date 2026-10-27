@@ -5,7 +5,7 @@
     @if (ProjectService.ActiveProject != null)
     {
         <div class="active-project">
-            <span class="project-name">@ProjectService.ActiveProject.Name</span>
+            <span class="project-name" style="color:white">@ProjectService.ActiveProject.Name</span>
             <button class="btn btn-sm btn-outline-light mt-1" @onclick="OpenProject">Switch</button>
         </div>
     }
@@ -34,7 +34,7 @@
     <NavLink class="nav-link" href="parser">📄 Script Parser</NavLink>
 </div>
 <div class="nav-item px-3">
-    <NavLink class="nav-link" href="characters">👁️👄👁️ Characters</NavLink>
+    <NavLink class="nav-link" href="character-manager">👁️👄👁️ Characters</NavLink>
 </div>
 <div class="nav-item px-3">
     <NavLink class="nav-link" href="preview">👀 Script Preview</NavLink>
