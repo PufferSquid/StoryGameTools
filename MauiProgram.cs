@@ -16,13 +16,14 @@ namespace StoryGameTools
                 });
 
             builder.Services.AddMauiBlazorWebView();
-            builder.Services.AddMauiBlazorWebView();
             builder.Services.AddSingleton<ILoggerService, LoggerService>();
             builder.Services.AddSingleton<CharacterDatabaseService>();
             builder.Services.AddSingleton<ScriptParserService>();
             builder.Services.AddTransient<FileService>();
             builder.Services.AddSingleton<AppSettingsService>();
             builder.Services.AddSingleton<ProjectService>();
+            builder.Services.AddSingleton<ImageSlicerService>();
+            
 
 #if WINDOWS
             builder.Services.AddSingleton<IFolderPickerService,

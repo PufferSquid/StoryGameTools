@@ -4,7 +4,8 @@
 
 <div class="character-editor">
     <div class="editor-header">
-        <h2>@Entry.DisplayName</h2>
+        <h2>Name: @Entry.DisplayName</h2>
+        <h2>ID: @_editId</h2>
         <div class="header-actions">
             <button class="btn btn-secondary" @onclick="ToggleEditIdentity">Edit</button>
             <button class="btn btn-danger" @onclick="ConfirmDelete">Delete Character</button>
@@ -61,7 +62,7 @@
                                 CharacterId="@CharacterId"
                                 Emotion="@emo"
                                 ImagePath="@null"
-                                ProjectRoot=@ProjectService.ActiveProjectPath"
+                                ProjectRoot="@ProjectService.ActiveProjectPath"
                                 OnChanged="@OnEmotionChanged" />
                 }
             </div>

@@ -1,0 +1,47 @@
+.slicer-page {
+    padding: 2rem;
+}
+
+.toolbar {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.status {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+.status.error {
+    color: #f2994a;
+}
+
+.preview-info {
+    font-size: 0.85rem;
+    color: #aaa;
+    margin-bottom: 0.5rem;
+}
+
+.preview-container {
+    max-width: 900px;
+    max-height: 70vh;
+    overflow: auto;
+    border: 1px solid #333;
+}
+
+.grid-overlay {
+    position: relative;
+    display: inline-block;
+    background-image:
+        repeating-linear-gradient(to right, rgba(255, 60, 60, 0.7) 0, rgba(255, 60, 60, 0.7) 1px, transparent 1px, transparent 100%),
+        repeating-linear-gradient(to bottom, rgba(255, 60, 60, 0.7) 0, rgba(255, 60, 60, 0.7) 1px, transparent 1px, transparent 100%);
+    background-size: var(--col-size) var(--row-size);
+}
+
+.preview-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}

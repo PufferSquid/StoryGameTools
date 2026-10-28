@@ -100,17 +100,37 @@ namespace StoryGameTools.Components.Services
         public async Task RenameEmotionAsync(string characterId, string oldEmotion, string newEmotion)
         {
             var db = await LoadAsync();
-            var entry = db.Characters[NormalizeId(characterId)];
+            var characterKey = NormalizeId(characterId);
+            if (!db.Characters.TryGetValue(characterKey, out var entry))
+                throw new InvalidOperationException($"Character '{characterKey}' not found.");
+
             var oldKey = NormalizeEmotion(oldEmotion);
             var newKey = NormalizeEmotion(newEmotion);
 
+            if (string.IsNullOrWhiteSpace(newKey))
+                throw new InvalidOperationException("Emotion name is required.");
             if (newKey == oldKey) return;
             if (entry.Emotions.ContainsKey(newKey))
                 throw new InvalidOperationException($"'{newKey}' already exists on this character.");
 
-            entry.Emotions[newKey] = entry.Emotions[oldKey];
+            if (!entry.Emotions.TryGetValue(oldKey, out var imagePath))
+                throw new InvalidOperationException($"Emotion '{oldKey}' not found on '{characterKey}'.");
+
+            var scriptsPath = _projectService.GetProjectPath("dialogueScripts");
+            var usedInScripts = scriptsPath != null
+                && Directory.Exists(scriptsPath)
+                && ScanEmotionsFromScripts(scriptsPath).Contains(oldKey);
+            var usedByAnotherCharacter = db.Characters
+                .Where(character => character.Key != characterKey)
+                .Any(character => character.Value.Emotions.ContainsKey(oldKey));
+
+            entry.Emotions[newKey] = imagePath;
             entry.Emotions.Remove(oldKey);
-            if (!db.GlobalEmotions.Contains(newKey)) db.GlobalEmotions.Add(newKey);
+            if (!db.GlobalEmotions.Any(emotion => NormalizeEmotion(emotion) == newKey))
+                db.GlobalEmotions.Add(newKey);
+            if (!usedInScripts && !usedByAnotherCharacter)
+                db.GlobalEmotions.RemoveAll(emotion => NormalizeEmotion(emotion) == oldKey);
+
             await SaveAsync(db);
         }
 

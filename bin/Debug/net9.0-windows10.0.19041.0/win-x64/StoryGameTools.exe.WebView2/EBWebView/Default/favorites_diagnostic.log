@@ -1,0 +1,59 @@
+2026-10-28 19:09:10.600: [INFO] CurrentProfilePath: C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default
+2026-10-28 19:09:10.600: [INFO] Profiles total count: 1
+2026-10-28 19:09:10.600: [INFO] Profile: name=Profile 1 path=C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default lastActive=null
+2026-10-28 19:09:10.600: [INFO] LastUsedProfileDir: C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default
+2026-10-28 19:09:10.600: [INFO] OnDoneLoading sync enabled: 0
+2026-10-28 19:09:10.600: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-10-28 19:09:10.600: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-10-28 19:09:10.600: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-10-28 19:13:49.314: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-10-28 19:14:32.617: [INFO] CurrentProfilePath: C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default
+2026-10-28 19:14:32.617: [INFO] Profiles total count: 1
+2026-10-28 19:14:32.630: [INFO] Profile: name=Profile 1 path=C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default lastActive=2026-10-28T19:10:51.916Z
+2026-10-28 19:14:32.630: [INFO] LastUsedProfileDir: C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default
+2026-10-28 19:14:32.630: [INFO] MostRecentlyActiveProfile: name=Profile 1 path=C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default lastActive=2026-10-28T19:10:51.916Z
+2026-10-28 19:14:32.630: [INFO] OnDoneLoading sync enabled: 0
+2026-10-28 19:14:32.630: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-10-28 19:14:32.630: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-10-28 19:14:32.630: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-10-28 20:06:33.667: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-10-28 20:07:27.935: [INFO] CurrentProfilePath: C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default
+2026-10-28 20:07:27.935: [INFO] Profiles total count: 1
+2026-10-28 20:07:27.936: [INFO] Profile: name=Profile 1 path=C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default lastActive=2026-10-28T19:35:15.807Z
+2026-10-28 20:07:27.936: [INFO] LastUsedProfileDir: C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default
+2026-10-28 20:07:27.936: [INFO] MostRecentlyActiveProfile: name=Profile 1 path=C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default lastActive=2026-10-28T19:35:15.807Z
+2026-10-28 20:07:27.936: [INFO] OnDoneLoading sync enabled: 0
+2026-10-28 20:07:27.936: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-10-28 20:07:27.936: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-10-28 20:07:27.936: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-10-28 20:07:51.121: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-10-28 20:08:38.795: [INFO] CurrentProfilePath: C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default
+2026-10-28 20:08:38.795: [INFO] Profiles total count: 1
+2026-10-28 20:08:38.796: [INFO] Profile: name=Profile 1 path=C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default lastActive=2026-10-28T20:07:28.243Z
+2026-10-28 20:08:38.796: [INFO] LastUsedProfileDir: C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default
+2026-10-28 20:08:38.796: [INFO] MostRecentlyActiveProfile: name=Profile 1 path=C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default lastActive=2026-10-28T20:07:28.243Z
+2026-10-28 20:08:38.796: [INFO] OnDoneLoading sync enabled: 0
+2026-10-28 20:08:38.796: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-10-28 20:08:38.796: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-10-28 20:08:38.796: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-10-28 20:27:13.661: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-10-28 20:34:12.982: [INFO] CurrentProfilePath: C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default
+2026-10-28 20:34:12.982: [INFO] Profiles total count: 1
+2026-10-28 20:34:12.982: [INFO] Profile: name=Profile 1 path=C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default lastActive=2026-10-28T20:25:46.333Z
+2026-10-28 20:34:12.982: [INFO] LastUsedProfileDir: C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default
+2026-10-28 20:34:12.983: [INFO] MostRecentlyActiveProfile: name=Profile 1 path=C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default lastActive=2026-10-28T20:25:46.333Z
+2026-10-28 20:34:12.983: [INFO] OnDoneLoading sync enabled: 0
+2026-10-28 20:34:12.983: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-10-28 20:34:12.983: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-10-28 20:34:12.983: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-10-28 21:10:01.420: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-10-28 21:10:48.991: [INFO] CurrentProfilePath: C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default
+2026-10-28 21:10:48.991: [INFO] Profiles total count: 1
+2026-10-28 21:10:48.991: [INFO] Profile: name=Profile 1 path=C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default lastActive=2026-10-28T21:03:35.886Z
+2026-10-28 21:10:48.991: [INFO] LastUsedProfileDir: C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default
+2026-10-28 21:10:48.991: [INFO] MostRecentlyActiveProfile: name=Profile 1 path=C:\Users\User\Documents\CodeProjects\StoryGameTools\bin\Debug\net9.0-windows10.0.19041.0\win-x64\StoryGameTools.exe.WebView2\EBWebView\Default lastActive=2026-10-28T21:03:35.886Z
+2026-10-28 21:10:48.991: [INFO] OnDoneLoading sync enabled: 0
+2026-10-28 21:10:48.991: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-10-28 21:10:48.991: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-10-28 21:10:48.991: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-10-28 21:11:30.922: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1

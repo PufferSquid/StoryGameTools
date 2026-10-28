@@ -17,6 +17,27 @@
         }
     </div>
 
+    @if (_showAddDialog)
+    {
+        <div class="modal-backdrop" @onclick="CloseAddDialog">
+            <div class="character-modal" @onclick:stopPropagation>
+                <h3>Add Character</h3>
+                <label>
+                    Name
+                    <input @bind="_newDisplayName" @bind:event="oninput" placeholder="Character Name" />
+                </label>
+                @if (!string.IsNullOrEmpty(_addError))
+                {
+                    <p class="error">@_addError</p>
+                }
+                <div class="character-modal-actions">
+                    <button class="btn btn-secondary" @onclick="CloseAddDialog">Cancel</button>
+                    <button class="btn btn-primary" @onclick="ConfirmAddCharacter">Add</button>
+                </div>
+            </div>
+        </div>
+    }
+
     @if (ProjectService.ActiveProjectPath == null)
     {
         <div class="empty-state">
@@ -42,7 +63,6 @@
                     <button class="character-item @(kvp.Key == _selectedId ? "selected" : "")"
                             @onclick="() => SelectCharacter(kvp.Key)">
                         <span class="char-name">@kvp.Value.DisplayName</span>
-                        <span class="char-id">@kvp.Key</span>
                     </button>
                 }
             </aside>
@@ -50,7 +70,7 @@
             <section class="character-detail">
                 @if (_selectedId != null && _database.Characters.TryGetValue(_selectedId, out var entry))
                 {
-                    <CharacterEditor CharacterId="_selectedId"
+                    <CharacterEditor CharacterId="@_selectedId"
                                     Entry="entry"
                                     GlobalEmotions="_database.GlobalEmotions"
                                     OnSave="OnCharacterSaved"
@@ -62,30 +82,6 @@
     }
 </div>
 
-@if (_showAddDialog)
-{
-    <div class="modal-backdrop" @onclick="CloseAddDialog">
-        <div class="modal" @onclick:stopPropagation>
-            <h3>Add Character</h3>
-            <label>
-                Character ID (used in scripts)
-                <input @bind="_newId" @bind:event="oninput" placeholder="sarah" />
-            </label>
-            <label>
-                Display Name
-                <input @bind="_newDisplayName" @bind:event="oninput" placeholder="Sarah" />
-            </label>
-            @if (!string.IsNullOrEmpty(_addError))
-            {
-                <p class="error">@_addError</p>
-            }
-            <div class="modal-actions">
-                <button class="btn btn-secondary" @onclick="CloseAddDialog">Cancel</button>
-                <button class="btn btn-primary" @onclick="ConfirmAddCharacter">Add</button>
-            </div>
-        </div>
-    </div>
-}
 
 @code {
     private CharacterDatabase _database = new();
@@ -95,7 +91,6 @@
     private bool _statusIsError;
 
     private bool _showAddDialog;
-    private string _newId = "";
     private string _newDisplayName = "";
     private string? _addError;
 
@@ -147,7 +142,6 @@
 
     private void OpenAddCharacter()
     {
-        _newId = "";
         _newDisplayName = "";
         _addError = null;
         _showAddDialog = true;
@@ -157,10 +151,10 @@
 
     private async Task ConfirmAddCharacter()
     {
-        var id = CharacterDatabaseService.NormalizeId(_newId);
+        var id = CharacterDatabaseService.NormalizeId(_newDisplayName);
         if (string.IsNullOrWhiteSpace(id))
         {
-            _addError = "Character ID is required.";
+            _addError = "Name is required.";
             return;
         }
         if (_database.Characters.ContainsKey(id))
@@ -171,7 +165,7 @@
 
         try
         {
-            await CharacterService.AddCharacterAsync(id, _newDisplayName);
+            await CharacterService.AddCharacterAsync(id, _newDisplayName.Trim());
             _showAddDialog = false;
             await LoadDatabaseAsync();
             _selectedId = id;

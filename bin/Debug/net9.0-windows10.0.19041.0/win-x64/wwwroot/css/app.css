@@ -168,6 +168,11 @@ h1:focus {
     box-sizing: border-box;
 }
 
+.rename-error {
+    color: #b00020;
+    font-size: .72rem;
+}
+
 .cell-name:hover {
     border-color: #ccc;
 }

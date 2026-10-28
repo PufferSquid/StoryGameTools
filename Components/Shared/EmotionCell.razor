@@ -18,6 +18,10 @@
     @if (ImagePath != null)
     {
         <input class="cell-name" value="@Emotion" @onchange="OnRename" />
+        @if (!string.IsNullOrEmpty(_renameError))
+        {
+            <span class="rename-error">@_renameError</span>
+        }
     }
     else
     {
@@ -34,6 +38,7 @@
 
     private ElementReference _root;
     private DotNetObjectReference<EmotionCell>? _dotNetRef;
+    private string? _renameError;
 
     private string? ImageUrl =>
         ImagePath == null || ProjectRoot == null ? null
@@ -58,8 +63,18 @@
 
     private async Task OnRename(ChangeEventArgs e)
     {
-        await CharacterService.RenameEmotionAsync(
-            CharacterId, Emotion, e.Value?.ToString() ?? "");
+        _renameError = null;
+        try
+        {
+            await CharacterService.RenameEmotionAsync(
+                CharacterId, Emotion, e.Value?.ToString() ?? "");
+        }
+        catch (Exception ex)
+        {
+            _renameError = ex.Message;
+            return;
+        }
+
         await OnChanged.InvokeAsync();
     }
 

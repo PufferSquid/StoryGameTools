@@ -178,6 +178,60 @@ main[b-5oy8wf4ykj] {
         overflow-y: auto;
     }
 }
+/* /Components/Pages/CharacterManager.razor.rz.scp.css */
+.modal-backdrop[b-z5ahimrrup] {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.character-modal[b-z5ahimrrup] {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1.5rem;
+    width: 320px;
+    color: #d7d7d7;
+}
+
+.character-modal h3[b-z5ahimrrup] {
+    margin: 0 0 1rem;
+}
+
+.character-modal label[b-z5ahimrrup] {
+    display: block;
+    font-size: 0.85rem;
+    color: #aaa;
+    margin-bottom: 1rem;
+}
+
+.character-modal input[b-z5ahimrrup] {
+    display: block;
+    width: 100%;
+    margin-top: 0.3rem;
+    padding: 0.4rem 0.5rem;
+    background: #0f0f0f;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.character-modal-actions[b-z5ahimrrup] {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.character-modal .error[b-z5ahimrrup] {
+    color: #f2994a;
+    font-size: 0.85rem;
+}
 /* /Components/Pages/Dashboard.razor.rz.scp.css */
 .dashboard[b-pd30e6o8yp] {
     padding: 2rem;
@@ -240,6 +294,7 @@ main[b-5oy8wf4ykj] {
     color: #aaa;
     margin: 0;
 }
+/* /Components/Pages/ImageSlicer.razor.rz.scp.css */
 /* /Components/Pages/Parser.razor.rz.scp.css */
 .parser-page[b-j4348gnrme] {
     padding: 2rem;

@@ -12,12 +12,12 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>gq8n4tlppv</Fingerprint>
-      <Integrity>CMwOJPT7KtG6KY7eqdG/1RxaBsgiTk2x2cjVwY7sLRg=</Integrity>
+      <Fingerprint>5hnufg74hy</Fingerprint>
+      <Integrity>pw5EXpHPXImwnQO6cs7v8iOMyhf4wR+LBu7yyj0xvow=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <FileLength>5196</FileLength>
-      <LastWriteTime>Sun, 04 Oct 2026 07:18:25 GMT</LastWriteTime>
+      <FileLength>5263</FileLength>
+      <LastWriteTime>Wed, 28 Oct 2026 19:33:14 GMT</LastWriteTime>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\app.css'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\bootstrap\bootstrap.min.css'))">
@@ -132,12 +132,12 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName>ScopedCss</AssetTraitName>
       <AssetTraitValue>ApplicationBundle</AssetTraitValue>
-      <Fingerprint>i8e90r1thq</Fingerprint>
-      <Integrity>Ukx7jfpxfSFr91g57b5StOpbGsWtULoNyRdJlUtmJ04=</Integrity>
+      <Fingerprint>ftq6ccgu28</Fingerprint>
+      <Integrity>Q4k2zhREvjlipy72TxBG7Z0Lqr2ZU0uRQ870v8U8ZBE=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <FileLength>8822</FileLength>
-      <LastWriteTime>Fri, 02 Oct 2026 05:43:24 GMT</LastWriteTime>
+      <FileLength>10019</FileLength>
+      <LastWriteTime>Wed, 28 Oct 2026 20:31:53 GMT</LastWriteTime>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\StoryGameTools.styles.css'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>

@@ -12,6 +12,7 @@
           "Microsoft.AspNetCore.Components.WebView.Maui": "9.0.120",
           "Microsoft.Extensions.Logging.Debug": "9.0.8",
           "Microsoft.Maui.Controls": "9.0.120",
+          "SixLabors.ImageSharp": "3.1.5",
           "Microsoft.Web.WebView2.Core.Projection": "1.0.3179.45",
           "runtimepack.Microsoft.Windows.SDK.NET.Ref": "10.0.19041.57"
         },
@@ -46,8 +47,7 @@
       },
       "Microsoft.AspNetCore.Components/9.0.9": {
         "dependencies": {
-          "Microsoft.AspNetCore.Authorization": "9.0.9",
-          "Microsoft.AspNetCore.Components.Analyzers": "9.0.9"
+          "Microsoft.AspNetCore.Authorization": "9.0.9"
         },
         "runtime": {
           "lib/net9.0/Microsoft.AspNetCore.Components.dll": {
@@ -56,7 +56,6 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Components.Analyzers/9.0.9": {},
       "Microsoft.AspNetCore.Components.Forms/9.0.9": {
         "dependencies": {
           "Microsoft.AspNetCore.Components": "9.0.9"
@@ -348,14 +347,6 @@
       },
       "Microsoft.Maui.Controls/9.0.120": {
         "dependencies": {
-          "Microsoft.Maui.Controls.Build.Tasks": "9.0.120",
-          "Microsoft.Maui.Controls.Core": "9.0.120",
-          "Microsoft.Maui.Controls.Xaml": "9.0.120",
-          "Microsoft.Maui.Resizetizer": "9.0.120"
-        }
-      },
-      "Microsoft.Maui.Controls.Build.Tasks/9.0.120": {
-        "dependencies": {
           "Microsoft.Maui.Controls.Core": "9.0.120",
           "Microsoft.Maui.Controls.Xaml": "9.0.120"
         }
@@ -503,7 +494,6 @@
           "Microsoft.Maui.Graphics": "9.0.120",
           "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop": "9.0.120",
           "Microsoft.Web.WebView2": "1.0.3179.45",
-          "Microsoft.Windows.SDK.BuildTools": "10.0.22621.756",
           "Microsoft.WindowsAppSDK": "1.7.250909003"
         },
         "runtime": {
@@ -550,7 +540,6 @@
           }
         }
       },
-      "Microsoft.Maui.Resizetizer/9.0.120": {},
       "Microsoft.Web.WebView2/1.0.3179.45": {
         "native": {
           "runtimes/win-x64/native/WebView2Loader.dll": {
@@ -558,11 +547,9 @@
           }
         }
       },
-      "Microsoft.Windows.SDK.BuildTools/10.0.22621.756": {},
       "Microsoft.WindowsAppSDK/1.7.250909003": {
         "dependencies": {
-          "Microsoft.Web.WebView2": "1.0.3179.45",
-          "Microsoft.Windows.SDK.BuildTools": "10.0.22621.756"
+          "Microsoft.Web.WebView2": "1.0.3179.45"
         },
         "runtime": {
           "lib/net6.0-windows10.0.18362.0/Microsoft.Graphics.Imaging.Projection.dll": {
@@ -675,6 +662,14 @@
           }
         }
       },
+      "SixLabors.ImageSharp/3.1.5": {
+        "runtime": {
+          "lib/net6.0/SixLabors.ImageSharp.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.1.5.0"
+          }
+        }
+      },
       "Microsoft.Web.WebView2.Core.Projection/1.0.3179.45": {
         "runtime": {
           "Microsoft.Web.WebView2.Core.Projection.dll": {
@@ -709,13 +704,6 @@
       "sha512": "sha512-n8hjxdgIAWTtYOu1bitWwi8HYR7OT78syKpNSzJ8jSvzv5xnJFMf7BaZCorNx+Y76CINKrG9TBNY6ovBSnNahQ==",
       "path": "microsoft.aspnetcore.components/9.0.9",
       "hashPath": "microsoft.aspnetcore.components.9.0.9.nupkg.sha512"
-    },
-    "Microsoft.AspNetCore.Components.Analyzers/9.0.9": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-jmT0+VkIoSq3VNshj8XX44aV/oQtA82xYa7ScqmAa7I2avXgMiQZzGEbd5dmn2PjKqYvI9MlK+gLyja1TYPzzQ==",
-      "path": "microsoft.aspnetcore.components.analyzers/9.0.9",
-      "hashPath": "microsoft.aspnetcore.components.analyzers.9.0.9.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Components.Forms/9.0.9": {
       "type": "package",
@@ -899,13 +887,6 @@
       "path": "microsoft.maui.controls/9.0.120",
       "hashPath": "microsoft.maui.controls.9.0.120.nupkg.sha512"
     },
-    "Microsoft.Maui.Controls.Build.Tasks/9.0.120": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-r9BcM8eZYd93AS42DaQ2O/rgBw24YtWScnY0NAc97IbGktu9+jcSYqPJzi8kgA7vjdAqhQMdjzoH5hQk2qoC0g==",
-      "path": "microsoft.maui.controls.build.tasks/9.0.120",
-      "hashPath": "microsoft.maui.controls.build.tasks.9.0.120.nupkg.sha512"
-    },
     "Microsoft.Maui.Controls.Core/9.0.120": {
       "type": "package",
       "serviceable": true,
@@ -948,13 +929,6 @@
       "path": "microsoft.maui.graphics.win2d.winui.desktop/9.0.120",
       "hashPath": "microsoft.maui.graphics.win2d.winui.desktop.9.0.120.nupkg.sha512"
     },
-    "Microsoft.Maui.Resizetizer/9.0.120": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-npXjLP1/MjSY4bThiZXJGPAyermhMoDpEiaos9O0oSAC+jp0ykbCtzaUds/wrR6CbG24wongDJu9bilo1RR1RQ==",
-      "path": "microsoft.maui.resizetizer/9.0.120",
-      "hashPath": "microsoft.maui.resizetizer.9.0.120.nupkg.sha512"
-    },
     "Microsoft.Web.WebView2/1.0.3179.45": {
       "type": "package",
       "serviceable": true,
@@ -962,19 +936,19 @@
       "path": "microsoft.web.webview2/1.0.3179.45",
       "hashPath": "microsoft.web.webview2.1.0.3179.45.nupkg.sha512"
     },
-    "Microsoft.Windows.SDK.BuildTools/10.0.22621.756": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-7ZL2sFSioYm1Ry067Kw1hg0SCcW5kuVezC2SwjGbcPE61Nn+gTbH86T73G3LcEOVj0S3IZzNuE/29gZvOLS7VA==",
-      "path": "microsoft.windows.sdk.buildtools/10.0.22621.756",
-      "hashPath": "microsoft.windows.sdk.buildtools.10.0.22621.756.nupkg.sha512"
-    },
     "Microsoft.WindowsAppSDK/1.7.250909003": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-zeVFVrkFYPkAL1cmXo62D1LVC66VqBiMx+WfZ3aDUmizNECCJewMTk0JwjlgYQcIqxqsK1SjF1CeG74TsokWpQ==",
       "path": "microsoft.windowsappsdk/1.7.250909003",
       "hashPath": "microsoft.windowsappsdk.1.7.250909003.nupkg.sha512"
+    },
+    "SixLabors.ImageSharp/3.1.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lNtlq7dSI/QEbYey+A0xn48z5w4XHSffF8222cC4F4YwTXfEImuiBavQcWjr49LThT/pRmtWJRcqA/PlL+eJ6g==",
+      "path": "sixlabors.imagesharp/3.1.5",
+      "hashPath": "sixlabors.imagesharp.3.1.5.nupkg.sha512"
     },
     "Microsoft.Web.WebView2.Core.Projection/1.0.3179.45": {
       "type": "reference",

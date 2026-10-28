@@ -1,0 +1,141 @@
+@page "/image-slicer"
+@using SixLabors.ImageSharp
+@using SixLabors.ImageSharp.PixelFormats
+@using StoryGameTools.Components.Services
+@inject ImageSlicerService SlicerService
+@inject ProjectService ProjectService
+@implements IDisposable
+
+<PageTitle>Image Splitter</PageTitle>
+
+<div class="slicer-page">
+    <h2>Image Splitter</h2>
+
+    @if (ProjectService.ActiveProjectPath == null)
+    {
+        <div class="empty-state">
+            <p>No project is open. Please open or create a project first.</p>
+        </div>
+    }
+    else
+    {
+        <div class="toolbar">
+            <InputFile OnChange="OnFileSelected" accept=".png" />
+            <label>
+                Slice size (px)
+                <input type="number" min="1" @bind="_sliceSize" @bind:event="oninput" @onchange="OnSliceSizeChanged" />
+            </label>
+            <button class="btn btn-primary" @onclick="DoSlice" disabled="@(!HasImage || _slicing)">
+                @(_slicing ? "Slicing…" : "Slice")
+            </button>
+        </div>
+
+        @if (_statusMessage != null)
+        {
+            <p class="status @(_statusIsError ? "error" : "")">@_statusMessage</p>
+        }
+
+        @if (HasImage)
+        {
+            <div class="preview-info">
+                @_image!.Width × @_image.Height px — @_grid!.Columns × @_grid.Rows slices
+            </div>
+            <div class="preview-container">
+                <div class="grid-overlay" style="@GridOverlayStyle">
+                    <img src="@_previewDataUrl" class="preview-image" />
+                </div>
+            </div>
+        }
+    }
+</div>
+
+@code {
+    private int _sliceSize = 2000;
+    private Image<Rgba32>? _image;
+    private SliceGridInfo? _grid;
+    private string? _previewDataUrl;
+    private bool _slicing;
+    private string? _statusMessage;
+    private bool _statusIsError;
+
+    private bool HasImage => _image != null;
+
+    private string GridOverlayStyle
+    {
+        get
+        {
+            if (_grid == null) return "";
+            double colPercent = Math.Min(100, _sliceSize * 100.0 / _grid.ImageWidth);
+            double rowPercent = Math.Min(100, _sliceSize * 100.0 / _grid.ImageHeight);
+            var ci = System.Globalization.CultureInfo.InvariantCulture;
+            return $"--col-size:{colPercent.ToString(ci)}%; --row-size:{rowPercent.ToString(ci)}%;";
+        }
+    }
+
+    private async Task OnFileSelected(InputFileChangeEventArgs e)
+    {
+        ClearStatus();
+        _image?.Dispose();
+        _image = null;
+
+        var file = e.File;
+        if (file == null) return;
+
+        try
+        {
+            using var stream = file.OpenReadStream(maxAllowedSize: 50 * 1024 * 1024);
+            using var ms = new MemoryStream();
+            await stream.CopyToAsync(ms);
+            var bytes = ms.ToArray();
+
+            _previewDataUrl = $"data:image/png;base64,{Convert.ToBase64String(bytes)}";
+
+            using var loadStream = new MemoryStream(bytes);
+            _image = await Image.LoadAsync<Rgba32>(loadStream);
+            _grid = SlicerService.BuildGridInfo(_image.Width, _image.Height, _sliceSize);
+        }
+        catch (Exception ex)
+        {
+            SetStatus($"Could not load image: {ex.Message}", true);
+        }
+    }
+
+    private void OnSliceSizeChanged()
+    {
+        if (_image != null)
+            _grid = SlicerService.BuildGridInfo(_image.Width, _image.Height, Math.Max(1, _sliceSize));
+    }
+
+    private async Task DoSlice()
+    {
+        if (_image == null) return;
+
+        _slicing = true;
+        ClearStatus();
+        try
+        {
+            var saved = await SlicerService.SliceAndSaveAsync(_image, Math.Max(1, _sliceSize));
+            SetStatus(saved.Count > 0
+                ? $"Saved {saved.Count} slice(s) to images/unhandled/"
+                : "No opaque slices found — nothing was saved.", false);
+        }
+        catch (Exception ex)
+        {
+            SetStatus($"Slicing failed: {ex.Message}", true);
+        }
+        finally
+        {
+            _slicing = false;
+        }
+    }
+
+    private void SetStatus(string message, bool isError)
+    {
+        _statusMessage = message;
+        _statusIsError = isError;
+    }
+
+    private void ClearStatus() => _statusMessage = null;
+
+    public void Dispose() => _image?.Dispose();
+}
